@@ -5,7 +5,10 @@
     "delete": "Delete",
     "confirm": "Confirm",
     "loading": "Loading...",
-    "error": "An error occurred"
+    "error": "An error occurred",
+    "actions": "Actions",
+    "back": "Back",
+    "all": "All"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -15,12 +18,23 @@
   "auth": {
     "login": {
       "title": "Sign In",
+      "subtitle": "Enter your credentials to access your account",
       "email": "Email",
       "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
       "submit": "Sign In",
-      "forgotPassword": "Forgot password"
+      "demoHint": "Demo: demo@example.com / demo123"
     },
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "email": "Email",
+      "submit": "Send Reset Link",
+      "success": "Reset link sent. Check your email.",
+      "backToLogin": "Back to sign in"
+    }
   },
   "theme": {
     "light": "Light",
@@ -31,10 +45,6 @@
     "tr": "Turkish",
     "en": "English",
     "toggle": "Toggle Language"
-  },
-  "foundation": {
-    "title": "Foundation Ready",
-    "description": "Pinia, Router, vue-query, i18n and dark mode setup complete."
   },
   "layout": {
     "sidebar": "Sidebar",
@@ -48,6 +58,136 @@
       "profile": "Profile",
       "logout": "Sign Out"
     }
+  },
+  "dashboard": {
+    "kpi": {
+      "revenue": "Revenue",
+      "users": "Users",
+      "orders": "Orders",
+      "conversion": "Conversion"
+    },
+    "chart": {
+      "revenue": "Monthly Revenue"
+    },
+    "recentTransactions": "Recent Transactions",
+    "txStatus": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "failed": "Failed"
+    }
+  },
+  "users": {
+    "list": {
+      "title": "Users",
+      "selected": "{count} selected",
+      "bulkRemove": "Delete Selected",
+      "bulkDeactivate": "Deactivate",
+      "confirmRemoveTitle": "Delete user?",
+      "confirmRemoveDesc": "This action cannot be undone.",
+      "confirmBulkRemoveTitle": "Delete {count} users?",
+      "confirmDeactivateTitle": "Deactivate {count} users?",
+      "filterRole": "Filter by role",
+      "filterStatus": "Filter by status"
+    },
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "createdAt": "Joined",
+      "actions": "Actions"
+    },
+    "roles": {
+      "admin": "Admin",
+      "editor": "Editor",
+      "viewer": "Viewer"
+    },
+    "statuses": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending"
+    },
+    "actions": {
+      "view": "View",
+      "delete": "Delete"
+    },
+    "detail": {
+      "title": "User Detail",
+      "notFound": "User not found",
+      "tabs": {
+        "profile": "Profile",
+        "activity": "Activity",
+        "permissions": "Permissions"
+      },
+      "profile": {
+        "title": "Profile Information",
+        "name": "Full Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "save": "Save Changes",
+        "saved": "Profile updated"
+      },
+      "activity": {
+        "title": "Activity History",
+        "empty": "No activity yet"
+      },
+      "permissions": {
+        "title": "Permissions & Access",
+        "role": "User Role",
+        "description": "Role description",
+        "adminDesc": "Full access to all system resources.",
+        "editorDesc": "Can create and edit content.",
+        "viewerDesc": "Read-only access."
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "profile": "Profile",
+      "appearance": "Appearance",
+      "notifications": "Notifications",
+      "danger": "Danger Zone"
+    },
+    "profile": {
+      "title": "Profile Information",
+      "subtitle": "Update your account details",
+      "name": "Full Name",
+      "email": "Email",
+      "save": "Save",
+      "saved": "Profile updated"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "subtitle": "Manage your theme and language preferences",
+      "theme": "Theme",
+      "themeDesc": "Choose between light and dark theme",
+      "locale": "Language",
+      "localeDesc": "Select the interface language"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "subtitle": "Choose which notifications you receive",
+      "email": "Email Notifications",
+      "emailDesc": "Important updates sent via email",
+      "push": "Push Notifications",
+      "pushDesc": "Browser push notifications",
+      "marketing": "Marketing Emails",
+      "marketingDesc": "News about new features and campaigns"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "subtitle": "These actions are irreversible",
+      "deleteAccount": "Delete Account",
+      "deleteDesc": "All your data will be permanently deleted.",
+      "confirmTitle": "Are you sure you want to delete your account?",
+      "confirmDesc": "This action cannot be undone. All your data and content will be permanently deleted."
+    }
+  },
+  "foundation": {
+    "title": "Foundation Ready",
+    "description": "Pinia, Router, vue-query, i18n and dark mode setup complete."
   },
   "placeholder": {
     "dashboard": "Dashboard content coming in M6.",

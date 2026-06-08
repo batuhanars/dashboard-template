@@ -5,7 +5,10 @@
     "delete": "Sil",
     "confirm": "Onayla",
     "loading": "Yükleniyor...",
-    "error": "Hata oluştu"
+    "error": "Hata oluştu",
+    "actions": "İşlemler",
+    "back": "Geri",
+    "all": "Tümü"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -15,12 +18,23 @@
   "auth": {
     "login": {
       "title": "Giriş Yap",
+      "subtitle": "Hesabınıza erişmek için bilgilerinizi girin",
       "email": "E-posta",
       "password": "Şifre",
+      "rememberMe": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum",
       "submit": "Giriş",
-      "forgotPassword": "Şifremi unuttum"
+      "demoHint": "Demo: demo@example.com / demo123"
     },
-    "logout": "Çıkış Yap"
+    "logout": "Çıkış Yap",
+    "forgotPassword": {
+      "title": "Şifremi Unuttum",
+      "subtitle": "E-posta adresinizi girin, sıfırlama bağlantısı gönderelim.",
+      "email": "E-posta",
+      "submit": "Bağlantı Gönder",
+      "success": "Sıfırlama bağlantısı gönderildi. E-postanızı kontrol edin.",
+      "backToLogin": "Giriş sayfasına dön"
+    }
   },
   "theme": {
     "light": "Açık",
@@ -31,10 +45,6 @@
     "tr": "Türkçe",
     "en": "İngilizce",
     "toggle": "Dili Değiştir"
-  },
-  "foundation": {
-    "title": "Temel Hazır",
-    "description": "Pinia, Router, vue-query, i18n ve dark mode kurulumu tamamlandı."
   },
   "layout": {
     "sidebar": "Kenar Çubuğu",
@@ -48,6 +58,136 @@
       "profile": "Profil",
       "logout": "Çıkış Yap"
     }
+  },
+  "dashboard": {
+    "kpi": {
+      "revenue": "Gelir",
+      "users": "Kullanıcılar",
+      "orders": "Siparişler",
+      "conversion": "Dönüşüm"
+    },
+    "chart": {
+      "revenue": "Aylık Gelir (₺)"
+    },
+    "recentTransactions": "Son İşlemler",
+    "txStatus": {
+      "completed": "Tamamlandı",
+      "pending": "Beklemede",
+      "failed": "Başarısız"
+    }
+  },
+  "users": {
+    "list": {
+      "title": "Kullanıcılar",
+      "selected": "{count} seçili",
+      "bulkRemove": "Seçilenleri Sil",
+      "bulkDeactivate": "Pasifleştir",
+      "confirmRemoveTitle": "Kullanıcı silinsin mi?",
+      "confirmRemoveDesc": "Bu işlem geri alınamaz.",
+      "confirmBulkRemoveTitle": "{count} kullanıcı silinsin mi?",
+      "confirmDeactivateTitle": "{count} kullanıcı pasifleştirilsin mi?",
+      "filterRole": "Rol filtrele",
+      "filterStatus": "Durum filtrele"
+    },
+    "columns": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "role": "Rol",
+      "status": "Durum",
+      "createdAt": "Kayıt Tarihi",
+      "actions": "İşlemler"
+    },
+    "roles": {
+      "admin": "Yönetici",
+      "editor": "Editör",
+      "viewer": "Görüntüleyici"
+    },
+    "statuses": {
+      "active": "Aktif",
+      "inactive": "Pasif",
+      "pending": "Beklemede"
+    },
+    "actions": {
+      "view": "Görüntüle",
+      "delete": "Sil"
+    },
+    "detail": {
+      "title": "Kullanıcı Detayı",
+      "notFound": "Kullanıcı bulunamadı",
+      "tabs": {
+        "profile": "Profil",
+        "activity": "Aktivite",
+        "permissions": "Yetkiler"
+      },
+      "profile": {
+        "title": "Profil Bilgileri",
+        "name": "Ad Soyad",
+        "email": "E-posta",
+        "role": "Rol",
+        "status": "Durum",
+        "save": "Değişiklikleri Kaydet",
+        "saved": "Profil güncellendi"
+      },
+      "activity": {
+        "title": "Aktivite Geçmişi",
+        "empty": "Henüz aktivite yok"
+      },
+      "permissions": {
+        "title": "Yetki ve Erişim",
+        "role": "Kullanıcı Rolü",
+        "description": "Rol açıklaması",
+        "adminDesc": "Tüm sistem kaynaklarına tam erişim.",
+        "editorDesc": "İçerik oluşturma ve düzenleme yetkisi.",
+        "viewerDesc": "Yalnızca görüntüleme yetkisi."
+      }
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "tabs": {
+      "profile": "Profil",
+      "appearance": "Görünüm",
+      "notifications": "Bildirimler",
+      "danger": "Tehlikeli Bölge"
+    },
+    "profile": {
+      "title": "Profil Bilgileri",
+      "subtitle": "Hesap bilgilerinizi güncelleyin",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "save": "Kaydet",
+      "saved": "Profil güncellendi"
+    },
+    "appearance": {
+      "title": "Görünüm",
+      "subtitle": "Tema ve dil tercihlerinizi yönetin",
+      "theme": "Tema",
+      "themeDesc": "Açık veya koyu tema seçin",
+      "locale": "Dil",
+      "localeDesc": "Arayüz dilini seçin"
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "subtitle": "Hangi bildirimleri almak istediğinizi seçin",
+      "email": "E-posta Bildirimleri",
+      "emailDesc": "Önemli güncellemeler e-posta ile gönderilir",
+      "push": "Push Bildirimleri",
+      "pushDesc": "Tarayıcı push bildirimleri",
+      "marketing": "Pazarlama E-postaları",
+      "marketingDesc": "Yeni özellikler ve kampanya haberleri"
+    },
+    "danger": {
+      "title": "Tehlikeli Bölge",
+      "subtitle": "Bu işlemler geri alınamaz",
+      "deleteAccount": "Hesabı Sil",
+      "deleteDesc": "Tüm verileriniz kalıcı olarak silinir.",
+      "confirmTitle": "Hesabı silmek istediğinize emin misiniz?",
+      "confirmDesc": "Bu işlem geri alınamaz. Tüm verileriniz ve içerikleriniz kalıcı olarak silinecek."
+    }
+  },
+  "foundation": {
+    "title": "Temel Hazır",
+    "description": "Pinia, Router, vue-query, i18n ve dark mode kurulumu tamamlandı."
   },
   "placeholder": {
     "dashboard": "Gösterge Paneli içeriği M6'da gelecek.",
