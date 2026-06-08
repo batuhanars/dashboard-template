@@ -23,6 +23,12 @@ const router = createRouter({
           meta: { requiresAuth: true, titleKey: 'nav.users' },
         },
         {
+          path: 'users/:id',
+          name: 'user-detail',
+          component: () => import('@/views/users/UserDetailView.vue'),
+          meta: { requiresAuth: true, titleKey: 'users.detail.title' },
+        },
+        {
           path: 'settings',
           name: 'settings',
           component: () => import('@/views/settings/SettingsView.vue'),
@@ -38,6 +44,18 @@ const router = createRouter({
           path: '',
           name: 'login',
           component: () => import('@/views/auth/LoginView.vue'),
+          meta: { requiresAuth: false },
+        },
+      ],
+    },
+    {
+      path: '/forgot-password',
+      component: AuthLayout,
+      children: [
+        {
+          path: '',
+          name: 'forgot-password',
+          component: () => import('@/views/auth/ForgotPasswordView.vue'),
           meta: { requiresAuth: false },
         },
       ],
