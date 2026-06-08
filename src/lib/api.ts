@@ -74,8 +74,7 @@ http.interceptors.response.use(
 // ── Real API skeletons ───────────────────────────────────────────────────────
 
 const realAuth = {
-  login: (payload: LoginRequest) =>
-    http.post<Session>('/auth/login', payload).then((r) => r.data),
+  login: (payload: LoginRequest) => http.post<Session>('/auth/login', payload).then((r) => r.data),
   logout: () => http.post('/auth/logout').then(() => undefined as void),
   me: () => http.get<User>('/auth/me').then((r) => r.data),
   refresh: (refreshToken: string) =>
@@ -90,8 +89,7 @@ const realUsers = {
   list: (params: UserListParams) =>
     http.get<Paginated<User>>('/users', { params }).then((r) => r.data),
   detail: (id: string) => http.get<User>(`/users/${id}`).then((r) => r.data),
-  activities: (id: string) =>
-    http.get<Activity[]>(`/users/${id}/activities`).then((r) => r.data),
+  activities: (id: string) => http.get<Activity[]>(`/users/${id}/activities`).then((r) => r.data),
   update: (id: string, patch: Partial<User>) =>
     http.patch<User>(`/users/${id}`, patch).then((r) => r.data),
   remove: (id: string) => http.delete(`/users/${id}`).then(() => undefined as void),
@@ -113,9 +111,7 @@ export const api = {
       }
     : realAuth,
 
-  dashboard: USE_MOCKS
-    ? { summary: mock.mockDashboardSummary }
-    : realDashboard,
+  dashboard: USE_MOCKS ? { summary: mock.mockDashboardSummary } : realDashboard,
 
   users: USE_MOCKS
     ? {

@@ -30,9 +30,9 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-background">
+  <div class="bg-background flex min-h-screen">
     <!-- Sol panel — dekoratif (lg ve üzeri) -->
-    <div class="hidden flex-1 flex-col justify-between bg-zinc-900 p-10 dark:bg-zinc-950 lg:flex">
+    <div class="hidden flex-1 flex-col justify-between bg-zinc-900 p-10 lg:flex dark:bg-zinc-950">
       <div class="flex items-center gap-2">
         <div class="flex size-8 items-center justify-center rounded-lg bg-white">
           <span class="text-sm font-bold text-zinc-900">D</span>
@@ -50,9 +50,9 @@ const onSubmit = handleSubmit(async (values) => {
     <!-- Sağ panel — form -->
     <div class="flex flex-1 flex-col items-center justify-center px-6 py-12">
       <!-- Tema toggle (sağ üst) -->
-      <div class="absolute right-4 top-4">
+      <div class="absolute top-4 right-4">
         <button
-          class="flex size-9 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-accent"
+          class="border-border text-muted-foreground hover:bg-accent flex size-9 items-center justify-center rounded-md border"
           :title="t('theme.toggle')"
           @click="toggleTheme"
         >
@@ -64,10 +64,10 @@ const onSubmit = handleSubmit(async (values) => {
       <div class="w-full max-w-sm space-y-6">
         <!-- Başlık -->
         <div class="space-y-1 text-center">
-          <h1 class="text-2xl font-semibold tracking-tight text-foreground">
+          <h1 class="text-foreground text-2xl font-semibold tracking-tight">
             {{ $t('auth.login.title') }}
           </h1>
-          <p class="text-sm text-muted-foreground">{{ $t('auth.login.subtitle') }}</p>
+          <p class="text-muted-foreground text-sm">{{ $t('auth.login.subtitle') }}</p>
         </div>
 
         <!-- Form -->
@@ -87,18 +87,15 @@ const onSubmit = handleSubmit(async (values) => {
 
           <!-- Beni hatırla + Şifremi unuttum -->
           <div class="flex items-center justify-between">
-            <label class="flex items-center gap-2 text-sm text-foreground">
+            <label class="text-foreground flex items-center gap-2 text-sm">
               <input
                 v-model="rememberMe"
                 type="checkbox"
-                class="size-4 rounded border-input accent-primary"
+                class="border-input accent-primary size-4 rounded"
               />
               {{ $t('auth.login.rememberMe') }}
             </label>
-            <RouterLink
-              to="/forgot-password"
-              class="text-sm text-primary hover:underline"
-            >
+            <RouterLink to="/forgot-password" class="text-primary text-sm hover:underline">
               {{ $t('auth.login.forgotPassword') }}
             </RouterLink>
           </div>
@@ -109,7 +106,7 @@ const onSubmit = handleSubmit(async (values) => {
         </form>
 
         <!-- Demo ipucu -->
-        <p class="text-center text-xs text-muted-foreground">
+        <p class="text-muted-foreground text-center text-xs">
           {{ $t('auth.login.demoHint') }}
         </p>
       </div>

@@ -91,16 +91,16 @@ const roleDescKey: Record<UserRole, string> = {
     <!-- Başlık -->
     <div class="flex items-center gap-3">
       <button
-        class="flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+        class="text-muted-foreground hover:bg-accent hover:text-foreground flex size-8 items-center justify-center rounded-md"
         @click="router.back()"
       >
         <ArrowLeft class="size-4" />
       </button>
       <div>
-        <h1 class="text-2xl font-semibold text-foreground">
+        <h1 class="text-foreground text-2xl font-semibold">
           {{ isPending ? $t('common.loading') : (user?.name ?? $t('users.detail.notFound')) }}
         </h1>
-        <p v-if="user" class="text-sm text-muted-foreground">{{ user.email }}</p>
+        <p v-if="user" class="text-muted-foreground text-sm">{{ user.email }}</p>
       </div>
     </div>
 
@@ -150,7 +150,10 @@ const roleDescKey: Record<UserRole, string> = {
               <!-- Rol seçimi -->
               <div class="space-y-1.5">
                 <Label>{{ $t('users.detail.profile.role') }}</Label>
-                <Select :model-value="roleVal" @update:model-value="(v) => (roleVal = v as UserRole)">
+                <Select
+                  :model-value="roleVal"
+                  @update:model-value="(v) => (roleVal = v as UserRole)"
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -182,7 +185,11 @@ const roleDescKey: Record<UserRole, string> = {
 
               <div class="pt-2">
                 <Button type="submit" :disabled="isSubmitting || updateMutation.isPending.value">
-                  {{ isSubmitting || updateMutation.isPending.value ? $t('common.loading') : $t('users.detail.profile.save') }}
+                  {{
+                    isSubmitting || updateMutation.isPending.value
+                      ? $t('common.loading')
+                      : $t('users.detail.profile.save')
+                  }}
                 </Button>
               </div>
             </form>
@@ -202,7 +209,7 @@ const roleDescKey: Record<UserRole, string> = {
             </div>
             <div
               v-else-if="!activities?.length"
-              class="py-10 text-center text-sm text-muted-foreground"
+              class="text-muted-foreground py-10 text-center text-sm"
             >
               {{ $t('users.detail.activity.empty') }}
             </div>
@@ -210,12 +217,14 @@ const roleDescKey: Record<UserRole, string> = {
               <li
                 v-for="act in activities"
                 :key="act.id"
-                class="flex items-start gap-3 rounded-lg border border-border p-3"
+                class="border-border flex items-start gap-3 rounded-lg border p-3"
               >
                 <span class="text-base leading-none">{{ activityTypeIcon[act.type] }}</span>
                 <div class="min-w-0 flex-1">
-                  <p class="text-sm text-foreground">{{ act.description }}</p>
-                  <p class="mt-0.5 text-xs text-muted-foreground">{{ formatDate(act.createdAt) }}</p>
+                  <p class="text-foreground text-sm">{{ act.description }}</p>
+                  <p class="text-muted-foreground mt-0.5 text-xs">
+                    {{ formatDate(act.createdAt) }}
+                  </p>
                 </div>
               </li>
             </ul>
@@ -230,23 +239,23 @@ const roleDescKey: Record<UserRole, string> = {
             <CardTitle>{{ $t('users.detail.permissions.title') }}</CardTitle>
           </CardHeader>
           <CardContent class="space-y-4">
-            <div class="flex items-center gap-3 rounded-lg border border-border p-4">
-              <ShieldCheck class="size-8 shrink-0 text-primary" />
+            <div class="border-border flex items-center gap-3 rounded-lg border p-4">
+              <ShieldCheck class="text-primary size-8 shrink-0" />
               <div>
-                <p class="font-medium text-foreground">
+                <p class="text-foreground font-medium">
                   {{ $t(`users.roles.${user.role}`) }}
                 </p>
-                <p class="text-sm text-muted-foreground">
+                <p class="text-muted-foreground text-sm">
                   {{ $t(roleDescKey[user.role]) }}
                 </p>
               </div>
             </div>
 
-            <div class="rounded-lg border border-border p-4">
-              <p class="mb-3 text-sm font-medium text-foreground">
+            <div class="border-border rounded-lg border p-4">
+              <p class="text-foreground mb-3 text-sm font-medium">
                 {{ $t('users.detail.permissions.role') }}
               </p>
-              <div class="space-y-2 text-sm text-muted-foreground">
+              <div class="text-muted-foreground space-y-2 text-sm">
                 <template v-if="user.role === 'admin'">
                   <p>✓ Kullanıcı yönetimi</p>
                   <p>✓ Sistem ayarları</p>
@@ -273,10 +282,7 @@ const roleDescKey: Record<UserRole, string> = {
     </Tabs>
 
     <!-- Bulunamadı -->
-    <div
-      v-else
-      class="py-12 text-center text-sm text-muted-foreground"
-    >
+    <div v-else class="text-muted-foreground py-12 text-center text-sm">
       {{ $t('users.detail.notFound') }}
     </div>
   </div>

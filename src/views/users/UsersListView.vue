@@ -52,9 +52,7 @@ const { data, isPending } = useQuery({
   queryFn: () => api.users.list({ ...params }),
 })
 
-const pageCount = computed(() =>
-  data.value ? Math.ceil(data.value.total / params.pageSize) : -1,
-)
+const pageCount = computed(() => (data.value ? Math.ceil(data.value.total / params.pageSize) : -1))
 
 // ── Mutasyonlar ────────────────────────────────────────────────────────────
 
@@ -237,7 +235,7 @@ const columns = computed<ColumnDef<User, unknown>[]>(() => [
   <div class="space-y-5">
     <!-- Başlık + Filtreler -->
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <h1 class="text-2xl font-semibold text-foreground">{{ $t('users.list.title') }}</h1>
+      <h1 class="text-foreground text-2xl font-semibold">{{ $t('users.list.title') }}</h1>
 
       <div class="flex flex-wrap items-center gap-2">
         <!-- Rol filtresi -->
@@ -272,21 +270,21 @@ const columns = computed<ColumnDef<User, unknown>[]>(() => [
     <Transition name="fade">
       <div
         v-if="selectedRows.length > 0"
-        class="flex items-center gap-3 rounded-lg border border-border bg-muted/50 px-4 py-2.5"
+        class="border-border bg-muted/50 flex items-center gap-3 rounded-lg border px-4 py-2.5"
       >
-        <span class="text-sm font-medium text-foreground">
+        <span class="text-foreground text-sm font-medium">
           {{ $t('users.list.selected', { count: selectedRows.length }) }}
         </span>
         <div class="ml-auto flex gap-2">
           <button
-            class="rounded-md border border-border bg-background px-3 py-1 text-xs font-medium hover:bg-accent"
+            class="border-border bg-background hover:bg-accent rounded-md border px-3 py-1 text-xs font-medium"
             :disabled="bulkDeactivateMutation.isPending.value"
             @click="handleBulkDeactivate"
           >
             {{ $t('users.list.bulkDeactivate') }}
           </button>
           <button
-            class="rounded-md bg-destructive px-3 py-1 text-xs font-medium text-destructive-foreground hover:bg-destructive/90"
+            class="bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-md px-3 py-1 text-xs font-medium"
             :disabled="bulkRemoveMutation.isPending.value"
             @click="handleBulkRemove"
           >

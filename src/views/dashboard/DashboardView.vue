@@ -50,17 +50,15 @@ const revenueChartData = computed<ChartData>(() => {
 })
 
 const txStatusClass: Record<string, string> = {
-  completed:
-    'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
-  pending:
-    'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  completed: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+  pending: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
   failed: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
 }
 </script>
 
 <template>
   <div class="space-y-6">
-    <h1 class="text-2xl font-semibold text-foreground">{{ $t('nav.dashboard') }}</h1>
+    <h1 class="text-foreground text-2xl font-semibold">{{ $t('nav.dashboard') }}</h1>
 
     <!-- Loading skeleton -->
     <template v-if="isPending">
@@ -96,11 +94,7 @@ const txStatusClass: Record<string, string> = {
       <div class="grid gap-6 lg:grid-cols-3">
         <!-- Gelir grafiği -->
         <div class="lg:col-span-2">
-          <ChartCard
-            :title="$t('dashboard.chart.revenue')"
-            type="line"
-            :data="revenueChartData"
-          />
+          <ChartCard :title="$t('dashboard.chart.revenue')" type="line" :data="revenueChartData" />
         </div>
 
         <!-- Son işlemler -->
@@ -111,20 +105,20 @@ const txStatusClass: Record<string, string> = {
             </CardTitle>
           </CardHeader>
           <CardContent class="px-0 pb-0">
-            <ul class="divide-y divide-border">
+            <ul class="divide-border divide-y">
               <li
                 v-for="tx in data.recentTransactions"
                 :key="tx.id"
                 class="flex items-center justify-between px-4 py-3"
               >
                 <div class="min-w-0">
-                  <p class="truncate text-sm font-medium text-foreground">
+                  <p class="text-foreground truncate text-sm font-medium">
                     {{ tx.customerName }}
                   </p>
-                  <p class="text-xs text-muted-foreground">{{ formatDate(tx.createdAt) }}</p>
+                  <p class="text-muted-foreground text-xs">{{ formatDate(tx.createdAt) }}</p>
                 </div>
                 <div class="ml-3 shrink-0 text-right">
-                  <p class="text-sm font-semibold text-foreground">
+                  <p class="text-foreground text-sm font-semibold">
                     {{ formatCurrency(tx.amount, tx.currency) }}
                   </p>
                   <span

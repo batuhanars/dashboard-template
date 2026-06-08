@@ -3,11 +3,13 @@ const route = useRoute()
 const { t } = useI18n()
 
 const crumbs = computed(() =>
-  route.matched.filter((r) => r.meta.titleKey).map((r) => ({
-    name: String(r.name ?? ''),
-    label: t(r.meta.titleKey as string),
-    path: r.path || '/',
-  })),
+  route.matched
+    .filter((r) => r.meta.titleKey)
+    .map((r) => ({
+      name: String(r.name ?? ''),
+      label: t(r.meta.titleKey as string),
+      path: r.path || '/',
+    })),
 )
 </script>
 

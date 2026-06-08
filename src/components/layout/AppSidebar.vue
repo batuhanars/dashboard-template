@@ -28,22 +28,19 @@ function isActive(item: NavItem): boolean {
 <template>
   <div
     :class="[
-      'flex flex-col border-r border-sidebar-border bg-sidebar transition-all duration-300',
+      'border-sidebar-border bg-sidebar flex flex-col border-r transition-all duration-300',
       sidebarCollapsed ? 'w-16' : 'w-60',
     ]"
   >
     <!-- Logo -->
     <div
-      class="flex h-16 shrink-0 items-center border-b border-sidebar-border px-4"
+      class="border-sidebar-border flex h-16 shrink-0 items-center border-b px-4"
       :class="sidebarCollapsed ? 'justify-center' : 'gap-2'"
     >
-      <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary">
-        <span class="text-sm font-bold text-primary-foreground">D</span>
+      <div class="bg-primary flex size-8 shrink-0 items-center justify-center rounded-lg">
+        <span class="text-primary-foreground text-sm font-bold">D</span>
       </div>
-      <span
-        v-if="!sidebarCollapsed"
-        class="truncate text-sm font-semibold text-sidebar-foreground"
-      >
+      <span v-if="!sidebarCollapsed" class="text-sidebar-foreground truncate text-sm font-semibold">
         Dashboard
       </span>
     </div>
@@ -91,10 +88,10 @@ function isActive(item: NavItem): boolean {
     </nav>
 
     <!-- Collapse toggle -->
-    <div class="shrink-0 border-t border-sidebar-border p-2">
+    <div class="border-sidebar-border shrink-0 border-t p-2">
       <button
         :title="t('layout.toggleSidebar')"
-        class="flex w-full items-center justify-center rounded-md p-2 text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+        class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex w-full items-center justify-center rounded-md p-2 transition-colors"
         @click="ui.toggleSidebar()"
       >
         <ChevronLeft v-if="!sidebarCollapsed" class="size-5" />

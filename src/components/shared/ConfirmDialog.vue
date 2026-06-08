@@ -15,7 +15,11 @@ function handleCancel() {
 <template>
   <AlertDialog
     :open="confirmState.open"
-    @update:open="(v) => { if (!v) handleCancel() }"
+    @update:open="
+      (v) => {
+        if (!v) handleCancel()
+      }
+    "
   >
     <AlertDialogContent>
       <AlertDialogHeader>

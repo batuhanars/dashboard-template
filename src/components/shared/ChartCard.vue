@@ -50,9 +50,19 @@ const mergedOptions = computed<ChartOptions>(() => {
     <CardContent>
       <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
       <div class="h-60">
-        <Line v-if="type === 'line'" :key="chartKey" :data="(data as any)" :options="(mergedOptions as any)" />
-        <Bar v-else-if="type === 'bar'" :key="chartKey" :data="(data as any)" :options="(mergedOptions as any)" />
-        <Doughnut v-else :key="chartKey" :data="(data as any)" :options="(mergedOptions as any)" />
+        <Line
+          v-if="type === 'line'"
+          :key="chartKey"
+          :data="data as any"
+          :options="mergedOptions as any"
+        />
+        <Bar
+          v-else-if="type === 'bar'"
+          :key="chartKey"
+          :data="data as any"
+          :options="mergedOptions as any"
+        />
+        <Doughnut v-else :key="chartKey" :data="data as any" :options="mergedOptions as any" />
       </div>
     </CardContent>
   </Card>

@@ -51,7 +51,7 @@ async function handleDeleteAccount() {
 
 <template>
   <div class="space-y-5">
-    <h1 class="text-2xl font-semibold text-foreground">{{ $t('settings.title') }}</h1>
+    <h1 class="text-foreground text-2xl font-semibold">{{ $t('settings.title') }}</h1>
 
     <Tabs default-value="profile">
       <TabsList class="mb-4">
@@ -102,13 +102,19 @@ async function handleDeleteAccount() {
             <!-- Tema -->
             <div class="flex items-center justify-between">
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.appearance.theme') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.appearance.themeDesc') }}</p>
+                <p class="text-foreground font-medium">{{ $t('settings.appearance.theme') }}</p>
+                <p class="text-muted-foreground text-sm">
+                  {{ $t('settings.appearance.themeDesc') }}
+                </p>
               </div>
-              <div class="flex items-center gap-2 rounded-lg border border-border p-1">
+              <div class="border-border flex items-center gap-2 rounded-lg border p-1">
                 <button
                   class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors"
-                  :class="!isDark ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+                  :class="
+                    !isDark
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  "
                   @click="toggleTheme"
                 >
                   <Sun class="size-3.5" />
@@ -116,7 +122,11 @@ async function handleDeleteAccount() {
                 </button>
                 <button
                   class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors"
-                  :class="isDark ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+                  :class="
+                    isDark
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  "
                   @click="toggleTheme"
                 >
                   <Moon class="size-3.5" />
@@ -130,15 +140,21 @@ async function handleDeleteAccount() {
             <!-- Dil -->
             <div class="flex items-center justify-between">
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.appearance.locale') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.appearance.localeDesc') }}</p>
+                <p class="text-foreground font-medium">{{ $t('settings.appearance.locale') }}</p>
+                <p class="text-muted-foreground text-sm">
+                  {{ $t('settings.appearance.localeDesc') }}
+                </p>
               </div>
-              <div class="flex gap-1.5 rounded-lg border border-border p-1">
+              <div class="border-border flex gap-1.5 rounded-lg border p-1">
                 <button
                   v-for="lang in available"
                   :key="lang"
                   class="rounded-md px-3 py-1.5 text-sm transition-colors"
-                  :class="locale === lang ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+                  :class="
+                    locale === lang
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  "
                   @click="setLocale(lang)"
                 >
                   {{ $t(`locale.${lang}`) }}
@@ -156,25 +172,33 @@ async function handleDeleteAccount() {
             <CardTitle>{{ $t('settings.notifications.title') }}</CardTitle>
             <CardDescription>{{ $t('settings.notifications.subtitle') }}</CardDescription>
           </CardHeader>
-          <CardContent class="space-y-0 divide-y divide-border">
+          <CardContent class="divide-border space-y-0 divide-y">
             <div class="flex items-center justify-between py-4">
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.notifications.email') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.notifications.emailDesc') }}</p>
+                <p class="text-foreground font-medium">{{ $t('settings.notifications.email') }}</p>
+                <p class="text-muted-foreground text-sm">
+                  {{ $t('settings.notifications.emailDesc') }}
+                </p>
               </div>
               <Switch v-model:checked="notifications.email" />
             </div>
             <div class="flex items-center justify-between py-4">
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.notifications.push') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.notifications.pushDesc') }}</p>
+                <p class="text-foreground font-medium">{{ $t('settings.notifications.push') }}</p>
+                <p class="text-muted-foreground text-sm">
+                  {{ $t('settings.notifications.pushDesc') }}
+                </p>
               </div>
               <Switch v-model:checked="notifications.push" />
             </div>
             <div class="flex items-center justify-between py-4">
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.notifications.marketing') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.notifications.marketingDesc') }}</p>
+                <p class="text-foreground font-medium">
+                  {{ $t('settings.notifications.marketing') }}
+                </p>
+                <p class="text-muted-foreground text-sm">
+                  {{ $t('settings.notifications.marketingDesc') }}
+                </p>
               </div>
               <Switch v-model:checked="notifications.marketing" />
             </div>
@@ -190,10 +214,12 @@ async function handleDeleteAccount() {
             <CardDescription>{{ $t('settings.danger.subtitle') }}</CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="flex items-center justify-between rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+            <div
+              class="border-destructive/30 bg-destructive/5 flex items-center justify-between rounded-lg border p-4"
+            >
               <div>
-                <p class="font-medium text-foreground">{{ $t('settings.danger.deleteAccount') }}</p>
-                <p class="text-sm text-muted-foreground">{{ $t('settings.danger.deleteDesc') }}</p>
+                <p class="text-foreground font-medium">{{ $t('settings.danger.deleteAccount') }}</p>
+                <p class="text-muted-foreground text-sm">{{ $t('settings.danger.deleteDesc') }}</p>
               </div>
               <Button variant="destructive" @click="handleDeleteAccount">
                 {{ $t('settings.danger.deleteAccount') }}

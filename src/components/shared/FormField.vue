@@ -21,6 +21,6 @@ const { value, errorMessage } = useField<string>(() => props.name)
       :placeholder="placeholder"
       :class="errorMessage ? 'border-destructive focus-visible:ring-destructive' : ''"
     />
-    <p v-if="errorMessage" class="text-xs text-destructive">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="text-destructive text-xs">{{ errorMessage }}</p>
   </div>
 </template>

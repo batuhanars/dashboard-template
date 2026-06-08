@@ -39,12 +39,10 @@ function nextLocale(): void {
 </script>
 
 <template>
-  <header
-    class="flex h-16 shrink-0 items-center gap-3 border-b border-border bg-background px-4"
-  >
+  <header class="border-border bg-background flex h-16 shrink-0 items-center gap-3 border-b px-4">
     <!-- Mobile menu trigger -->
     <button
-      class="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:hidden"
+      class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors lg:hidden"
       :title="t('layout.openMenu')"
       @click="emit('open-mobile-menu')"
     >
@@ -60,7 +58,7 @@ function nextLocale(): void {
     <div class="flex items-center gap-1">
       <!-- Notifications -->
       <button
-        class="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors"
         :title="t('layout.notifications.title')"
         @click="notificationsOpen = true"
       >
@@ -69,7 +67,7 @@ function nextLocale(): void {
 
       <!-- Theme toggle -->
       <button
-        class="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors"
         :title="t('theme.toggle')"
         @click="toggleTheme"
       >
@@ -79,7 +77,7 @@ function nextLocale(): void {
 
       <!-- Locale toggle -->
       <button
-        class="flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-xs font-medium transition-colors"
         :title="t('locale.toggle')"
         @click="nextLocale"
       >
@@ -89,7 +87,9 @@ function nextLocale(): void {
       <!-- User menu -->
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
-          <button class="flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <button
+            class="focus-visible:ring-ring flex items-center rounded-full focus-visible:ring-2 focus-visible:outline-none"
+          >
             <Avatar class="size-8">
               <AvatarFallback class="text-xs">{{ userInitials }}</AvatarFallback>
             </Avatar>
@@ -98,8 +98,8 @@ function nextLocale(): void {
 
         <DropdownMenuContent align="end" class="w-48">
           <div class="px-2 py-1.5">
-            <p class="truncate text-sm font-medium text-foreground">{{ user?.name }}</p>
-            <p class="truncate text-xs text-muted-foreground">{{ user?.email }}</p>
+            <p class="text-foreground truncate text-sm font-medium">{{ user?.name }}</p>
+            <p class="text-muted-foreground truncate text-xs">{{ user?.email }}</p>
           </div>
           <DropdownMenuSeparator />
           <DropdownMenuItem as-child>
@@ -110,7 +110,7 @@ function nextLocale(): void {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            class="flex cursor-pointer items-center gap-2 text-destructive focus:text-destructive"
+            class="text-destructive focus:text-destructive flex cursor-pointer items-center gap-2"
             @click="handleLogout"
           >
             <LogOut class="size-4" />
@@ -127,7 +127,7 @@ function nextLocale(): void {
       <SheetHeader>
         <SheetTitle>{{ t('layout.notifications.title') }}</SheetTitle>
       </SheetHeader>
-      <div class="flex flex-1 items-center justify-center py-12 text-sm text-muted-foreground">
+      <div class="text-muted-foreground flex flex-1 items-center justify-center py-12 text-sm">
         {{ t('layout.notifications.empty') }}
       </div>
     </SheetContent>

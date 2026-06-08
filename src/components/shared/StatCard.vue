@@ -15,10 +15,10 @@ defineProps<{
     <CardContent class="p-5">
       <div class="flex items-start justify-between gap-3">
         <div class="min-w-0 flex-1">
-          <p class="truncate text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <p class="text-muted-foreground truncate text-xs font-medium tracking-wide uppercase">
             {{ label }}
           </p>
-          <p class="mt-1.5 text-2xl font-bold tabular-nums text-card-foreground">{{ value }}</p>
+          <p class="text-card-foreground mt-1.5 text-2xl font-bold tabular-nums">{{ value }}</p>
 
           <div v-if="deltaPct !== undefined" class="mt-1.5 flex items-center gap-1">
             <TrendingUp
@@ -37,7 +37,7 @@ defineProps<{
 
         <div
           v-if="icon"
-          class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"
+          class="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg"
         >
           <component :is="icon" class="size-5" />
         </div>

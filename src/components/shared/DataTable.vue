@@ -1,6 +1,11 @@
 <script setup lang="ts" generic="TData extends object, TValue">
 import { h } from 'vue'
-import type { ColumnDef, SortingState, PaginationState, RowSelectionState } from '@tanstack/vue-table'
+import type {
+  ColumnDef,
+  SortingState,
+  PaginationState,
+  RowSelectionState,
+} from '@tanstack/vue-table'
 import { useVueTable, getCoreRowModel, FlexRender } from '@tanstack/vue-table'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Search, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-vue-next'
@@ -33,11 +38,7 @@ const rowSelection = ref<RowSelectionState>({})
 const searchInput = ref('')
 
 // Debounce — global filter emit'i arama biterken tetiklenir
-watchDebounced(
-  searchInput,
-  (v) => emit('update:globalFilter', v),
-  { debounce: 350 },
-)
+watchDebounced(searchInput, (v) => emit('update:globalFilter', v), { debounce: 350 })
 
 // Seçim kolonu — enableRowSelection açıksa en başa eklenir
 const resolvedColumns = computed<ColumnDef<TData, TValue>[]>(() => {
@@ -120,14 +121,20 @@ const totalPages = computed(() => (props.pageCount > 0 ? props.pageCount : 1))
 function prevPage() {
   if (pagination.value.pageIndex > 0) {
     pagination.value = { ...pagination.value, pageIndex: pagination.value.pageIndex - 1 }
-    emit('update:pagination', { pageIndex: pagination.value.pageIndex, pageSize: pagination.value.pageSize })
+    emit('update:pagination', {
+      pageIndex: pagination.value.pageIndex,
+      pageSize: pagination.value.pageSize,
+    })
   }
 }
 
 function nextPage() {
   if (currentPage.value < totalPages.value) {
     pagination.value = { ...pagination.value, pageIndex: pagination.value.pageIndex + 1 }
-    emit('update:pagination', { pageIndex: pagination.value.pageIndex, pageSize: pagination.value.pageSize })
+    emit('update:pagination', {
+      pageIndex: pagination.value.pageIndex,
+      pageSize: pagination.value.pageSize,
+    })
   }
 }
 </script>
@@ -136,32 +143,31 @@ function nextPage() {
   <div class="space-y-3">
     <!-- Arama girişi -->
     <div class="relative">
-      <Search class="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+      <Search class="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
       <input
         v-model="searchInput"
         type="text"
         placeholder="Ara..."
-        class="h-9 w-full rounded-md border border-input bg-background pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:max-w-xs"
+        class="border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-ring h-9 w-full rounded-md border pr-3 pl-9 text-sm focus:ring-2 focus:outline-none sm:max-w-xs"
       />
     </div>
 
     <!-- Tablo -->
-    <div class="rounded-lg border border-border bg-card">
+    <div class="border-border bg-card rounded-lg border">
       <Table>
         <TableHeader>
-          <TableRow
-            v-for="headerGroup in table.getHeaderGroups()"
-            :key="headerGroup.id"
-          >
+          <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
             <TableHead
               v-for="header in headerGroup.headers"
               :key="header.id"
-              :style="header.column.columnDef.size ? { width: `${header.column.columnDef.size}px` } : {}"
+              :style="
+                header.column.columnDef.size ? { width: `${header.column.columnDef.size}px` } : {}
+              "
             >
               <template v-if="!header.isPlaceholder">
                 <button
                   v-if="header.column.getCanSort()"
-                  class="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide hover:text-foreground"
+                  class="hover:text-foreground flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase"
                   @click="header.column.toggleSorting()"
                 >
                   <FlexRender
@@ -186,10 +192,7 @@ function nextPage() {
           <!-- Loading skeleton -->
           <template v-if="loading">
             <TableRow v-for="i in SKELETON_ROWS" :key="i">
-              <TableCell
-                v-for="col in resolvedColumns"
-                :key="String(col.id ?? '')"
-              >
+              <TableCell v-for="col in resolvedColumns" :key="String(col.id ?? '')">
                 <Skeleton class="h-4 w-full" />
               </TableCell>
             </TableRow>
@@ -211,7 +214,10 @@ function nextPage() {
           <!-- Boş durum -->
           <template v-else>
             <TableRow>
-              <TableCell :colspan="resolvedColumns.length" class="py-12 text-center text-sm text-muted-foreground">
+              <TableCell
+                :colspan="resolvedColumns.length"
+                class="text-muted-foreground py-12 text-center text-sm"
+              >
                 Kayıt bulunamadı
               </TableCell>
             </TableRow>
@@ -221,18 +227,18 @@ function nextPage() {
     </div>
 
     <!-- Sayfalama -->
-    <div class="flex items-center justify-between text-sm text-muted-foreground">
+    <div class="text-muted-foreground flex items-center justify-between text-sm">
       <span>Sayfa {{ currentPage }} / {{ totalPages }}</span>
       <div class="flex items-center gap-1">
         <button
-          class="flex size-8 items-center justify-center rounded-md border border-border hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
+          class="border-border hover:bg-accent flex size-8 items-center justify-center rounded-md border disabled:pointer-events-none disabled:opacity-50"
           :disabled="currentPage <= 1"
           @click="prevPage"
         >
           <ChevronLeft class="size-4" />
         </button>
         <button
-          class="flex size-8 items-center justify-center rounded-md border border-border hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
+          class="border-border hover:bg-accent flex size-8 items-center justify-center rounded-md border disabled:pointer-events-none disabled:opacity-50"
           :disabled="currentPage >= totalPages"
           @click="nextPage"
         >

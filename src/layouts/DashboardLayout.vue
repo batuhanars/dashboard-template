@@ -3,7 +3,7 @@ const mobileOpen = ref(false)
 </script>
 
 <template>
-  <div class="flex h-screen overflow-hidden bg-background">
+  <div class="bg-background flex h-screen overflow-hidden">
     <AppSidebar class="hidden flex-shrink-0 lg:flex" />
 
     <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
