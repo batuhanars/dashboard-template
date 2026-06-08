@@ -1,8 +1,17 @@
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
-import type { AuthTokens, LoginRequest, Session, User } from '@/types/api'
+import type {
+  Activity,
+  AuthTokens,
+  DashboardSummary,
+  LoginRequest,
+  Paginated,
+  Session,
+  User,
+  UserListParams,
+} from '@/types/api'
 import { authStorage } from '@/lib/auth-storage'
-import * as mockHandlers from '@/lib/mocks/handlers'
+import * as mock from '@/lib/mocks/handlers'
 
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true'
 
@@ -62,26 +71,61 @@ http.interceptors.response.use(
   },
 )
 
+// ── Real API skeletons ───────────────────────────────────────────────────────
+
+const realAuth = {
+  login: (payload: LoginRequest) =>
+    http.post<Session>('/auth/login', payload).then((r) => r.data),
+  logout: () => http.post('/auth/logout').then(() => undefined as void),
+  me: () => http.get<User>('/auth/me').then((r) => r.data),
+  refresh: (refreshToken: string) =>
+    http.post<AuthTokens>('/auth/refresh', { refreshToken }).then((r) => r.data),
+}
+
+const realDashboard = {
+  summary: () => http.get<DashboardSummary>('/dashboard/summary').then((r) => r.data),
+}
+
+const realUsers = {
+  list: (params: UserListParams) =>
+    http.get<Paginated<User>>('/users', { params }).then((r) => r.data),
+  detail: (id: string) => http.get<User>(`/users/${id}`).then((r) => r.data),
+  activities: (id: string) =>
+    http.get<Activity[]>(`/users/${id}/activities`).then((r) => r.data),
+  update: (id: string, patch: Partial<User>) =>
+    http.patch<User>(`/users/${id}`, patch).then((r) => r.data),
+  remove: (id: string) => http.delete(`/users/${id}`).then(() => undefined as void),
+  bulkRemove: (ids: string[]) =>
+    http.post('/users/bulk-remove', { ids }).then(() => undefined as void),
+  bulkDeactivate: (ids: string[]) =>
+    http.post('/users/bulk-deactivate', { ids }).then(() => undefined as void),
+}
+
+// ── Public API — mock veya gerçek imzaya transparan ─────────────────────────
+
 export const api = {
-  auth: {
-    login: (payload: LoginRequest): Promise<Session> =>
-      USE_MOCKS
-        ? mockHandlers.authLogin(payload)
-        : http.post<Session>('/auth/login', payload).then((r) => r.data),
+  auth: USE_MOCKS
+    ? {
+        login: mock.authLogin,
+        logout: mock.authLogout,
+        me: mock.authMe,
+        refresh: mock.authRefresh,
+      }
+    : realAuth,
 
-    logout: (): Promise<void> =>
-      USE_MOCKS
-        ? mockHandlers.authLogout()
-        : http.post('/auth/logout').then(() => undefined),
+  dashboard: USE_MOCKS
+    ? { summary: mock.mockDashboardSummary }
+    : realDashboard,
 
-    me: (): Promise<User> =>
-      USE_MOCKS
-        ? mockHandlers.authMe()
-        : http.get<User>('/auth/me').then((r) => r.data),
-
-    refresh: (refreshToken: string): Promise<AuthTokens> =>
-      USE_MOCKS
-        ? mockHandlers.authRefresh(refreshToken)
-        : http.post<AuthTokens>('/auth/refresh', { refreshToken }).then((r) => r.data),
-  },
+  users: USE_MOCKS
+    ? {
+        list: mock.mockUsersList,
+        detail: mock.mockUsersDetail,
+        activities: mock.mockUsersActivities,
+        update: mock.mockUsersUpdate,
+        remove: mock.mockUsersRemove,
+        bulkRemove: mock.mockUsersBulkRemove,
+        bulkDeactivate: mock.mockUsersBulkDeactivate,
+      }
+    : realUsers,
 }
