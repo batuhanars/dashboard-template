@@ -87,7 +87,10 @@
       "confirmBulkRemoveTitle": "{count} kullanıcı silinsin mi?",
       "confirmDeactivateTitle": "{count} kullanıcı pasifleştirilsin mi?",
       "filterRole": "Rol filtrele",
-      "filterStatus": "Durum filtrele"
+      "filterStatus": "Durum filtrele",
+      "deleted": "Kullanıcı silindi",
+      "bulkRemoved": "Kullanıcılar silindi",
+      "bulkDeactivated": "Kullanıcılar pasifleştirildi"
     },
     "columns": {
       "name": "Ad Soyad",
@@ -138,7 +141,18 @@
         "description": "Rol açıklaması",
         "adminDesc": "Tüm sistem kaynaklarına tam erişim.",
         "editorDesc": "İçerik oluşturma ve düzenleme yetkisi.",
-        "viewerDesc": "Yalnızca görüntüleme yetkisi."
+        "viewerDesc": "Yalnızca görüntüleme yetkisi.",
+        "cap": {
+          "userManagement": "Kullanıcı yönetimi",
+          "systemSettings": "Sistem ayarları",
+          "contentManagement": "İçerik yönetimi",
+          "reports": "Raporlar ve analitik",
+          "contentCreation": "İçerik oluşturma ve düzenleme",
+          "mediaUpload": "Medya yükleme",
+          "contentView": "İçerik görüntüleme",
+          "reportsView": "Raporları görme",
+          "editCreate": "Düzenleme ve oluşturma"
+        }
       }
     }
   },

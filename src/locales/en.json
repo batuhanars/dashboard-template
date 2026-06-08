@@ -87,7 +87,10 @@
       "confirmBulkRemoveTitle": "Delete {count} users?",
       "confirmDeactivateTitle": "Deactivate {count} users?",
       "filterRole": "Filter by role",
-      "filterStatus": "Filter by status"
+      "filterStatus": "Filter by status",
+      "deleted": "User deleted",
+      "bulkRemoved": "Users deleted",
+      "bulkDeactivated": "Users deactivated"
     },
     "columns": {
       "name": "Name",
@@ -138,7 +141,18 @@
         "description": "Role description",
         "adminDesc": "Full access to all system resources.",
         "editorDesc": "Can create and edit content.",
-        "viewerDesc": "Read-only access."
+        "viewerDesc": "Read-only access.",
+        "cap": {
+          "userManagement": "User management",
+          "systemSettings": "System settings",
+          "contentManagement": "Content management",
+          "reports": "Reports & analytics",
+          "contentCreation": "Content creation & editing",
+          "mediaUpload": "Media upload",
+          "contentView": "Content viewing",
+          "reportsView": "View reports",
+          "editCreate": "Editing & creation"
+        }
       }
     }
   },
