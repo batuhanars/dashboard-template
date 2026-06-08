@@ -288,6 +288,7 @@ declare global {
   const useUiStore: typeof import('./stores/ui').useUiStore
   const useUrlSearchParams: typeof import('@vueuse/core').useUrlSearchParams
   const useUserMedia: typeof import('@vueuse/core').useUserMedia
+  const useUsersList: typeof import('./composables/useUsersList').useUsersList
   const useVModel: typeof import('@vueuse/core').useVModel
   const useVModels: typeof import('@vueuse/core').useVModels
   const useVibrate: typeof import('@vueuse/core').useVibrate
@@ -617,6 +618,7 @@ declare module 'vue' {
     readonly useUiStore: UnwrapRef<typeof import('./stores/ui')['useUiStore']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>
+    readonly useUsersList: UnwrapRef<typeof import('./composables/useUsersList')['useUsersList']>
     readonly useVModel: UnwrapRef<typeof import('@vueuse/core')['useVModel']>
     readonly useVModels: UnwrapRef<typeof import('@vueuse/core')['useVModels']>
     readonly useVibrate: UnwrapRef<typeof import('@vueuse/core')['useVibrate']>
