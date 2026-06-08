@@ -1,77 +1,144 @@
 <script setup lang="ts">
 import { useQuery } from '@tanstack/vue-query'
 import { api } from '@/lib/api'
+import { formatCurrency, formatNumber, formatDate } from '@/lib/format'
+import { DollarSign, Users, ShoppingCart, Percent } from 'lucide-vue-next'
+import type { ChartData } from 'chart.js'
+import type { KpiMetric } from '@/types/api'
+import type { Component } from 'vue'
 
-const { data, isPending, isError } = useQuery({
+const { t } = useI18n()
+const { isDark } = useTheme()
+
+const { data, isPending } = useQuery({
   queryKey: ['dashboard', 'summary'],
   queryFn: () => api.dashboard.summary(),
 })
+
+const kpiIcons: Record<string, Component> = {
+  revenue: DollarSign,
+  users: Users,
+  orders: ShoppingCart,
+  conversion: Percent,
+}
+
+function formatKpiValue(metric: KpiMetric): string {
+  if (metric.key === 'revenue') return formatCurrency(metric.value)
+  if (metric.key === 'conversion') return `${metric.value.toFixed(1)}%`
+  return formatNumber(metric.value)
+}
+
+const revenueChartData = computed<ChartData>(() => {
+  const series = data.value?.revenueSeries ?? []
+  const color = isDark.value ? '#818cf8' : '#6366f1'
+  return {
+    labels: series.map((p) => p.date.slice(5)),
+    datasets: [
+      {
+        label: t('dashboard.chart.revenue'),
+        data: series.map((p) => p.value),
+        borderColor: color,
+        backgroundColor: isDark.value ? 'rgba(129,140,248,0.12)' : 'rgba(99,102,241,0.12)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      },
+    ],
+  }
+})
+
+const txStatusClass: Record<string, string> = {
+  completed:
+    'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+  pending:
+    'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  failed: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
+}
 </script>
 
 <template>
   <div class="space-y-6">
     <h1 class="text-2xl font-semibold text-foreground">{{ $t('nav.dashboard') }}</h1>
 
-    <div v-if="isPending" class="text-sm text-muted-foreground">{{ $t('common.loading') }}</div>
-
-    <div v-else-if="isError" class="text-sm text-destructive">{{ $t('common.error') }}</div>
+    <!-- Loading skeleton -->
+    <template v-if="isPending">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Card v-for="i in 4" :key="i">
+          <CardContent class="p-5">
+            <Skeleton class="mb-2 h-3 w-24" />
+            <Skeleton class="h-8 w-32" />
+            <Skeleton class="mt-2 h-3 w-16" />
+          </CardContent>
+        </Card>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="lg:col-span-2"><Skeleton class="h-80 rounded-lg" /></div>
+        <Skeleton class="h-80 rounded-lg" />
+      </div>
+    </template>
 
     <template v-else-if="data">
-      <!-- KPI Metrikleri -->
+      <!-- KPI kartları -->
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div
+        <StatCard
           v-for="metric in data.metrics"
           :key="metric.key"
-          class="rounded-lg border border-border bg-card p-4"
-        >
-          <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            {{ metric.key }}
-          </p>
-          <p class="mt-1 text-2xl font-bold text-card-foreground">
-            {{ metric.key === 'conversion' ? metric.value.toFixed(1) + '%' : metric.value.toLocaleString('tr-TR') }}
-          </p>
-          <p
-            class="mt-1 text-xs font-medium"
-            :class="metric.deltaPct >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'"
-          >
-            {{ metric.deltaPct >= 0 ? '+' : '' }}{{ metric.deltaPct }}%
-          </p>
-        </div>
+          :label="$t(`dashboard.kpi.${metric.key}`)"
+          :value="formatKpiValue(metric)"
+          :delta-pct="metric.deltaPct"
+          :icon="kpiIcons[metric.key]"
+        />
       </div>
 
-      <!-- Son İşlemler -->
-      <div class="rounded-lg border border-border bg-card">
-        <div class="border-b border-border px-4 py-3">
-          <h2 class="text-sm font-semibold text-card-foreground">Son İşlemler</h2>
+      <!-- Grafik + Son işlemler -->
+      <div class="grid gap-6 lg:grid-cols-3">
+        <!-- Gelir grafiği -->
+        <div class="lg:col-span-2">
+          <ChartCard
+            :title="$t('dashboard.chart.revenue')"
+            type="line"
+            :data="revenueChartData"
+          />
         </div>
-        <div class="divide-y divide-border">
-          <div
-            v-for="tx in data.recentTransactions"
-            :key="tx.id"
-            class="flex items-center justify-between px-4 py-3"
-          >
-            <div>
-              <p class="text-sm font-medium text-foreground">{{ tx.customerName }}</p>
-              <p class="text-xs text-muted-foreground">{{ new Date(tx.createdAt).toLocaleDateString('tr-TR') }}</p>
-            </div>
-            <div class="text-right">
-              <p class="text-sm font-semibold text-foreground">
-                {{ tx.amount.toLocaleString('tr-TR') }} {{ tx.currency }}
-              </p>
-              <span
-                class="inline-block rounded-full px-2 py-0.5 text-xs font-medium"
-                :class="{
-                  'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400': tx.status === 'completed',
-                  'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400': tx.status === 'pending',
-                  'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400': tx.status === 'failed',
-                }"
-              >{{ tx.status }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <p class="text-xs text-muted-foreground">{{ $t('placeholder.dashboard') }}</p>
+        <!-- Son işlemler -->
+        <Card>
+          <CardHeader class="pb-3">
+            <CardTitle class="text-sm font-semibold">
+              {{ $t('dashboard.recentTransactions') }}
+            </CardTitle>
+          </CardHeader>
+          <CardContent class="px-0 pb-0">
+            <ul class="divide-y divide-border">
+              <li
+                v-for="tx in data.recentTransactions"
+                :key="tx.id"
+                class="flex items-center justify-between px-4 py-3"
+              >
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-medium text-foreground">
+                    {{ tx.customerName }}
+                  </p>
+                  <p class="text-xs text-muted-foreground">{{ formatDate(tx.createdAt) }}</p>
+                </div>
+                <div class="ml-3 shrink-0 text-right">
+                  <p class="text-sm font-semibold text-foreground">
+                    {{ formatCurrency(tx.amount, tx.currency) }}
+                  </p>
+                  <span
+                    class="inline-block rounded-full px-2 py-0.5 text-xs font-medium"
+                    :class="txStatusClass[tx.status]"
+                  >
+                    {{ $t(`dashboard.txStatus.${tx.status}`) }}
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
     </template>
   </div>
 </template>
