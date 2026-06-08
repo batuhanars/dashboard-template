@@ -1,6 +1,6 @@
 # M6 — Showcase Sayfaları (Vitrin)
 
-**Status:** TODO
+**Status:** DONE — M6.1 remediation tamamlandı.
 **Önkoşul:** M5.
 **İlgili contract'lar:** Tümü. Görsel referans: **Snow UI Kit** (Figma MCP `get_design_context` ile sayfa bazlı).
 
