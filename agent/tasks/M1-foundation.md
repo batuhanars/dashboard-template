@@ -1,6 +1,6 @@
 # M1 — Foundation
 
-**Status:** TODO
+**Status:** DONE
 **Önkoşul:** M0 (done).
 **İlgili contract'lar:** `stores.md`, `mock-layer.md` (query-client), CONVENTIONS.md.
 
