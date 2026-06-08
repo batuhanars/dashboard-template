@@ -1,6 +1,6 @@
 # M2 — Auth Flow
 
-**Status:** TODO
+**Status:** DONE
 **Önkoşul:** M1.
 **İlgili contract'lar:** `auth.md`, `stores.md` (useAuthStore), `types.md` (auth tipleri), `mock-layer.md` (api.auth + demo creds).
 
