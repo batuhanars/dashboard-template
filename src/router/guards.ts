@@ -4,8 +4,9 @@ import { useAuthStore } from '@/stores/auth'
 export function registerGuards(router: Router): void {
   router.beforeEach((to) => {
     const auth = useAuthStore()
+    const requiresAuth = to.matched.some((r) => r.meta.requiresAuth)
 
-    if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    if (requiresAuth && !auth.isAuthenticated) {
       return { name: 'login', query: { redirect: to.fullPath } }
     }
 

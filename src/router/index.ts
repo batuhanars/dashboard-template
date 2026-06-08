@@ -1,20 +1,46 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      component: DashboardLayout,
       meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('@/views/dashboard/DashboardView.vue'),
+          meta: { requiresAuth: true, titleKey: 'nav.dashboard' },
+        },
+        {
+          path: 'users',
+          name: 'users',
+          component: () => import('@/views/users/UsersListView.vue'),
+          meta: { requiresAuth: true, titleKey: 'nav.users' },
+        },
+        {
+          path: 'settings',
+          name: 'settings',
+          component: () => import('@/views/settings/SettingsView.vue'),
+          meta: { requiresAuth: true, titleKey: 'nav.settings' },
+        },
+      ],
     },
     {
       path: '/login',
-      name: 'login',
-      component: () => import('@/views/auth/LoginView.vue'),
-      meta: { requiresAuth: false, layout: 'auth' },
+      component: AuthLayout,
+      children: [
+        {
+          path: '',
+          name: 'login',
+          component: () => import('@/views/auth/LoginView.vue'),
+          meta: { requiresAuth: false },
+        },
+      ],
     },
   ],
 })
