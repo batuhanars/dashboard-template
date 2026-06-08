@@ -24,7 +24,7 @@
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
       "submit": "Sign In",
-      "demoHint": "Demo: demo@example.com / demo123",
+      "demoHint": "Demo: demo{'@'}example.com / demo123",
       "marketingQuote": "Accelerate your projects with a modern admin panel template.",
       "marketingFooter": "Dashboard Template"
     },

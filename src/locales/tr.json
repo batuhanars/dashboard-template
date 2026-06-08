@@ -24,7 +24,7 @@
       "rememberMe": "Beni hatırla",
       "forgotPassword": "Şifremi unuttum",
       "submit": "Giriş",
-      "demoHint": "Demo: demo@example.com / demo123",
+      "demoHint": "Demo: demo{'@'}example.com / demo123",
       "marketingQuote": "Modern yönetim paneli şablonu ile projelerinizi hızlandırın.",
       "marketingFooter": "Dashboard Template"
     },
