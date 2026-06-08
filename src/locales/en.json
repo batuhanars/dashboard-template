@@ -24,7 +24,9 @@
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
       "submit": "Sign In",
-      "demoHint": "Demo: demo@example.com / demo123"
+      "demoHint": "Demo: demo@example.com / demo123",
+      "marketingQuote": "Accelerate your projects with a modern admin panel template.",
+      "marketingFooter": "Dashboard Template"
     },
     "logout": "Sign Out",
     "forgotPassword": {
@@ -196,7 +198,8 @@
       "deleteAccount": "Delete Account",
       "deleteDesc": "All your data will be permanently deleted.",
       "confirmTitle": "Are you sure you want to delete your account?",
-      "confirmDesc": "This action cannot be undone. All your data and content will be permanently deleted."
+      "confirmDesc": "This action cannot be undone. All your data and content will be permanently deleted.",
+      "deleteRequested": "Account deletion request received"
     }
   },
   "foundation": {

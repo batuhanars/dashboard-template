@@ -24,7 +24,9 @@
       "rememberMe": "Beni hatırla",
       "forgotPassword": "Şifremi unuttum",
       "submit": "Giriş",
-      "demoHint": "Demo: demo@example.com / demo123"
+      "demoHint": "Demo: demo@example.com / demo123",
+      "marketingQuote": "Modern yönetim paneli şablonu ile projelerinizi hızlandırın.",
+      "marketingFooter": "Dashboard Template"
     },
     "logout": "Çıkış Yap",
     "forgotPassword": {
@@ -196,7 +198,8 @@
       "deleteAccount": "Hesabı Sil",
       "deleteDesc": "Tüm verileriniz kalıcı olarak silinir.",
       "confirmTitle": "Hesabı silmek istediğinize emin misiniz?",
-      "confirmDesc": "Bu işlem geri alınamaz. Tüm verileriniz ve içerikleriniz kalıcı olarak silinecek."
+      "confirmDesc": "Bu işlem geri alınamaz. Tüm verileriniz ve içerikleriniz kalıcı olarak silinecek.",
+      "deleteRequested": "Hesap silme isteği alındı"
     }
   },
   "foundation": {

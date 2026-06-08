@@ -11,6 +11,8 @@ const route = useRoute()
 const { isDark, toggle: toggleTheme } = useTheme()
 const { t } = useI18n()
 
+const appName = import.meta.env.VITE_APP_NAME || 'Dashboard'
+
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(loginRequestSchema),
   initialValues: { email: '', password: '', rememberMe: false },
@@ -35,15 +37,13 @@ const onSubmit = handleSubmit(async (values) => {
     <div class="hidden flex-1 flex-col justify-between bg-zinc-900 p-10 lg:flex dark:bg-zinc-950">
       <div class="flex items-center gap-2">
         <div class="flex size-8 items-center justify-center rounded-lg bg-white">
-          <span class="text-sm font-bold text-zinc-900">D</span>
+          <span class="text-sm font-bold text-zinc-900">{{ appName.charAt(0) }}</span>
         </div>
-        <span class="text-lg font-semibold text-white">Dashboard</span>
+        <span class="text-lg font-semibold text-white">{{ appName }}</span>
       </div>
       <blockquote class="space-y-2">
-        <p class="text-lg text-zinc-200">
-          "Modern yönetim paneli şablonu ile projelerinizi hızlandırın."
-        </p>
-        <footer class="text-sm text-zinc-400">Dashboard Template</footer>
+        <p class="text-lg text-zinc-200">"{{ $t('auth.login.marketingQuote') }}"</p>
+        <footer class="text-sm text-zinc-400">{{ $t('auth.login.marketingFooter') }}</footer>
       </blockquote>
     </div>
 
