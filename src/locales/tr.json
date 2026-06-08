@@ -1,0 +1,39 @@
+{
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "confirm": "Onayla",
+    "loading": "Yükleniyor...",
+    "error": "Hata oluştu"
+  },
+  "nav": {
+    "dashboard": "Gösterge Paneli",
+    "users": "Kullanıcılar",
+    "settings": "Ayarlar"
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş Yap",
+      "email": "E-posta",
+      "password": "Şifre",
+      "submit": "Giriş",
+      "forgotPassword": "Şifremi unuttum"
+    },
+    "logout": "Çıkış Yap"
+  },
+  "theme": {
+    "light": "Açık",
+    "dark": "Koyu",
+    "toggle": "Temayı Değiştir"
+  },
+  "locale": {
+    "tr": "Türkçe",
+    "en": "İngilizce",
+    "toggle": "Dili Değiştir"
+  },
+  "foundation": {
+    "title": "Temel Hazır",
+    "description": "Pinia, Router, vue-query, i18n ve dark mode kurulumu tamamlandı."
+  }
+}
