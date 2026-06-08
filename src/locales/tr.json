@@ -35,5 +35,23 @@
   "foundation": {
     "title": "Temel Hazır",
     "description": "Pinia, Router, vue-query, i18n ve dark mode kurulumu tamamlandı."
+  },
+  "layout": {
+    "sidebar": "Kenar Çubuğu",
+    "toggleSidebar": "Kenar çubuğunu aç/kapat",
+    "openMenu": "Menüyü aç",
+    "notifications": {
+      "title": "Bildirimler",
+      "empty": "Henüz bildirim yok"
+    },
+    "user": {
+      "profile": "Profil",
+      "logout": "Çıkış Yap"
+    }
+  },
+  "placeholder": {
+    "dashboard": "Gösterge Paneli içeriği M6'da gelecek.",
+    "users": "Kullanıcı listesi M6'da gelecek.",
+    "settings": "Ayarlar sayfası M6'da gelecek."
   }
 }

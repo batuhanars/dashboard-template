@@ -35,5 +35,23 @@
   "foundation": {
     "title": "Foundation Ready",
     "description": "Pinia, Router, vue-query, i18n and dark mode setup complete."
+  },
+  "layout": {
+    "sidebar": "Sidebar",
+    "toggleSidebar": "Toggle sidebar",
+    "openMenu": "Open menu",
+    "notifications": {
+      "title": "Notifications",
+      "empty": "No notifications yet"
+    },
+    "user": {
+      "profile": "Profile",
+      "logout": "Sign Out"
+    }
+  },
+  "placeholder": {
+    "dashboard": "Dashboard content coming in M6.",
+    "users": "User list coming in M6.",
+    "settings": "Settings page coming in M6."
   }
 }
