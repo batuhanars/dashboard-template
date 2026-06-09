@@ -4,9 +4,17 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { CheckCircle } from 'lucide-vue-next'
 
-const schema = z.object({ email: z.string().email('Geçerli e-posta girin') })
+const { t } = useI18n()
 
-const { handleSubmit, isSubmitting } = useForm({ validationSchema: toTypedSchema(schema) })
+const schema = computed(() =>
+  toTypedSchema(
+    z.object({
+      email: z.string().min(1, t('validation.required')).email(t('validation.email')),
+    }),
+  ),
+)
+
+const { handleSubmit, isSubmitting } = useForm({ validationSchema: schema })
 
 const sent = ref(false)
 

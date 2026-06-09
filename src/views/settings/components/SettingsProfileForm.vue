@@ -9,13 +9,17 @@ const props = defineProps<{ user: User | null }>()
 
 const { t } = useI18n()
 
-const profileSchema = z.object({
-  name: z.string().min(2, 'En az 2 karakter'),
-  email: z.string().email('Geçerli e-posta girin'),
-})
+const profileSchema = computed(() =>
+  toTypedSchema(
+    z.object({
+      name: z.string().min(2, t('validation.minLength', { n: 2 })),
+      email: z.string().min(1, t('validation.required')).email(t('validation.email')),
+    }),
+  ),
+)
 
 const { handleSubmit, isSubmitting } = useForm({
-  validationSchema: toTypedSchema(profileSchema),
+  validationSchema: profileSchema,
   initialValues: { name: props.user?.name ?? '', email: props.user?.email ?? '' },
 })
 

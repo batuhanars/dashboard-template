@@ -7,7 +7,7 @@ export function registerGuards(router: Router): void {
     const requiresAuth = to.matched.some((r) => r.meta.requiresAuth)
 
     if (requiresAuth && !auth.isAuthenticated) {
-      return { name: 'login', query: { redirect: to.fullPath } }
+      return { name: 'login' }
     }
 
     if (to.name === 'login' && auth.isAuthenticated) {

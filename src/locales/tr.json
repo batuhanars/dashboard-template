@@ -1,4 +1,9 @@
 {
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "email": "Geçerli bir e-posta adresi girin",
+    "minLength": "En az {n} karakter girilmelidir"
+  },
   "common": {
     "save": "Kaydet",
     "cancel": "İptal",
@@ -8,12 +13,16 @@
     "error": "Hata oluştu",
     "actions": "İşlemler",
     "back": "Geri",
-    "all": "Tümü"
+    "all": "Tümü",
+    "search": "Ara..."
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
     "users": "Kullanıcılar",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "group": {
+      "management": "Yönetim"
+    }
   },
   "auth": {
     "login": {
@@ -69,7 +78,11 @@
       "conversion": "Dönüşüm"
     },
     "chart": {
-      "revenue": "Aylık Gelir (₺)"
+      "revenue": "Aylık Gelir (₺)",
+      "weeklyRevenue": "Haftalık Gelir Özeti",
+      "txDistribution": "İşlem Dağılımı",
+      "currentPeriod": "Mevcut Dönem",
+      "previousPeriod": "Önceki Dönem"
     },
     "recentTransactions": "Son İşlemler",
     "txStatus": {

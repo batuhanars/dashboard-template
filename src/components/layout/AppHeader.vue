@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Menu, Bell, Sun, Moon, LogOut, User } from 'lucide-vue-next'
+import { Menu, Bell, Sun, Moon, LogOut, User, Search, LayoutDashboard, Users, Settings } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
 const emit = defineEmits<{
@@ -9,11 +9,19 @@ const emit = defineEmits<{
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const router = useRouter()
+const route = useRoute()
 const { isDark, toggle: toggleTheme } = useTheme()
 const { locale, setLocale, available } = useLocale()
 const { t } = useI18n()
 
 const notificationsOpen = ref(false)
+const searchQuery = ref('')
+
+const quickLinks = [
+  { name: 'home', labelKey: 'nav.dashboard', icon: LayoutDashboard, path: '/' },
+  { name: 'users', labelKey: 'nav.users', icon: Users, path: '/users' },
+  { name: 'settings', labelKey: 'nav.settings', icon: Settings, path: '/settings' },
+]
 
 const userInitials = computed(() => {
   if (!user.value?.name) return '?'
@@ -36,29 +44,57 @@ function nextLocale(): void {
   const next = available[(current + 1) % available.length]
   setLocale(next)
 }
+
+function isActive(name: string): boolean {
+  return route.name === name
+}
 </script>
 
 <template>
-  <header class="border-border bg-background flex h-16 shrink-0 items-center gap-3 border-b px-4">
+  <header class="border-border bg-background/95 backdrop-blur-sm flex h-16 shrink-0 items-center gap-3 border-b px-4 shadow-sm">
     <!-- Mobile menu trigger -->
     <button
-      class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors lg:hidden"
+      class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-lg transition-colors lg:hidden"
       :title="t('layout.openMenu')"
       @click="emit('open-mobile-menu')"
     >
       <Menu class="size-5" />
     </button>
 
-    <!-- Breadcrumb -->
-    <div class="flex-1 overflow-hidden">
-      <AppBreadcrumb />
-    </div>
+    <!-- Quick nav links -->
+    <nav class="hidden items-center gap-0.5 lg:flex">
+      <RouterLink
+        v-for="link in quickLinks"
+        :key="link.name"
+        :to="link.path"
+        class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm transition-colors"
+        :class="isActive(link.name)
+          ? 'bg-accent text-foreground font-medium'
+          : 'text-muted-foreground hover:bg-accent hover:text-foreground'"
+      >
+        <component :is="link.icon" class="size-3.5 shrink-0" />
+        {{ t(link.labelKey) }}
+      </RouterLink>
+    </nav>
+
+    <div class="flex-1" />
 
     <!-- Actions -->
     <div class="flex items-center gap-1">
+      <!-- Search bar -->
+      <div class="relative hidden items-center sm:flex">
+        <Search class="pointer-events-none absolute left-2.5 size-3.5 text-muted-foreground" />
+        <input
+          v-model="searchQuery"
+          type="text"
+          :placeholder="t('common.search')"
+          class="border-border bg-muted/40 placeholder:text-muted-foreground/60 focus:ring-ring h-8 w-40 rounded-lg border pl-8 pr-3 text-sm transition-all outline-none focus:w-52 focus:ring-1"
+        />
+      </div>
+
       <!-- Notifications -->
       <button
-        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-lg transition-colors"
         :title="t('layout.notifications.title')"
         @click="notificationsOpen = true"
       >
@@ -67,7 +103,7 @@ function nextLocale(): void {
 
       <!-- Theme toggle -->
       <button
-        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-md transition-colors"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-lg transition-colors"
         :title="t('theme.toggle')"
         @click="toggleTheme"
       >
@@ -77,7 +113,7 @@ function nextLocale(): void {
 
       <!-- Locale toggle -->
       <button
-        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-xs font-medium transition-colors"
+        class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-9 min-w-9 items-center justify-center rounded-lg px-2 text-xs font-semibold transition-colors"
         :title="t('locale.toggle')"
         @click="nextLocale"
       >

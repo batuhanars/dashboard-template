@@ -14,19 +14,22 @@ const app = createApp(App)
 const pinia = createPinia()
 
 app.use(pinia)
+
+// Router kurulmadan önce oturumu yükle.
+// app.use(router) çağrısı initial navigation'ı başlatır ve beforeEach guard'ları hemen çalışır.
+// fetchCurrentUser burada tamamlanmazsa guard user=null görür ve login'e yönlendirir.
+const authStore = useAuthStore()
+await authStore.fetchCurrentUser()
+
 app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 app.use(i18n)
 
 registerGuards(router)
 
-const authStore = useAuthStore()
-
 registerAuthFailureCallback(() => {
   authStore.logout()
   router.push('/login')
 })
-
-await authStore.fetchCurrentUser()
 
 app.mount('#app')

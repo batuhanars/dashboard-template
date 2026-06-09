@@ -13,15 +13,19 @@ const props = defineProps<{ user: User }>()
 const { t } = useI18n()
 const queryClient = useQueryClient()
 
-const updateSchema = z.object({
-  name: z.string().min(2, 'En az 2 karakter'),
-  email: z.string().email('Geçerli e-posta girin'),
-  role: userRoleSchema,
-  status: userStatusSchema,
-})
+const updateSchema = computed(() =>
+  toTypedSchema(
+    z.object({
+      name: z.string().min(2, t('validation.minLength', { n: 2 })),
+      email: z.string().min(1, t('validation.required')).email(t('validation.email')),
+      role: userRoleSchema,
+      status: userStatusSchema,
+    }),
+  ),
+)
 
 const { handleSubmit, isSubmitting, setValues } = useForm({
-  validationSchema: toTypedSchema(updateSchema),
+  validationSchema: updateSchema,
 })
 
 const { value: roleVal } = useField<UserRole>('role')

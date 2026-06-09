@@ -2,6 +2,8 @@
 
 Vitrin kalitesinde, "Use this template" ile çoğaltılmaya hazır Vue 3 admin panel şablonu. Mock data ile sıfır backend bağımlılığı, dark mode ve TR/EN i18n baştan kurulu.
 
+![Dashboard](docs/dashboard.png)
+
 ## Özellikler
 
 - **Mock API** — `VITE_USE_MOCKS=true` ile hiçbir backend olmadan tam çalışan demo
@@ -30,6 +32,12 @@ Vitrin kalitesinde, "Use this template" ile çoğaltılmaya hazır Vue 3 admin p
 
 - Node.js **20+**
 - npm **10+**
+
+## Ekran Görüntüleri
+
+| Login | Dashboard |
+|-------|-----------|
+| ![Login](docs/login.png) | ![Dashboard](docs/dashboard.png) |
 
 ## Hızlı Başlangıç
 
