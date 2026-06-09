@@ -30,14 +30,8 @@ const { columns } = useUsersColumns(
 
 <template>
   <div class="space-y-5">
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div>
       <h1 class="text-foreground text-2xl font-semibold">{{ $t('users.list.title') }}</h1>
-      <UsersFilterBar
-        :filter-role="filterRole"
-        :filter-status="filterStatus"
-        @update:filter-role="(v) => (filterRole = v)"
-        @update:filter-status="(v) => (filterStatus = v)"
-      />
     </div>
 
     <Transition name="fade">
@@ -61,7 +55,16 @@ const { columns } = useUsersColumns(
       @update:sorting="onSorting"
       @update:global-filter="onGlobalFilter"
       @row-selection-change="(rows) => (selectedRows = rows)"
-    />
+    >
+      <template #toolbar>
+        <UsersFilterBar
+          :filter-role="filterRole"
+          :filter-status="filterStatus"
+          @update:filter-role="(v) => (filterRole = v)"
+          @update:filter-status="(v) => (filterStatus = v)"
+        />
+      </template>
+    </DataTable>
   </div>
 </template>
 

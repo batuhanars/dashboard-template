@@ -122,8 +122,8 @@ function nextPage() {
 <template>
   <div class="rounded-xl bg-muted/60 dark:bg-muted/40 overflow-hidden">
 
-    <!-- Top bar: arama -->
-    <div class="flex items-center gap-3 px-4 py-3 border-b border-border/40">
+    <!-- Top bar: arama + ek araçlar (slot) -->
+    <div class="flex flex-wrap items-center gap-2 px-4 py-3 border-b border-border/40">
       <div class="relative">
         <Search class="pointer-events-none absolute top-1/2 left-2.5 size-3.5 -translate-y-1/2 text-muted-foreground" />
         <input
@@ -133,6 +133,7 @@ function nextPage() {
           class="h-8 w-48 rounded-lg border border-border/50 bg-background/70 pl-8 pr-3 text-sm placeholder:text-muted-foreground/60 outline-none transition-all focus:w-60 focus:ring-1 focus:ring-ring"
         />
       </div>
+      <slot name="toolbar" />
     </div>
 
     <!-- Tablo -->
