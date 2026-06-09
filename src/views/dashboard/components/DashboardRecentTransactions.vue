@@ -12,7 +12,7 @@ const txStatusClass: Record<string, string> = {
 </script>
 
 <template>
-  <div class="rounded-xl bg-muted/60 dark:bg-muted/40 overflow-hidden">
+  <div class="rounded-xl bg-muted/60 dark:bg-muted overflow-hidden">
     <!-- Başlık -->
     <div class="px-5 pt-5 pb-3 border-b border-border/40">
       <p class="text-muted-foreground text-xs font-semibold uppercase tracking-widest">

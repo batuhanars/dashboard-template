@@ -41,7 +41,7 @@ const mergedOptions = computed<ChartOptions>(() => {
 </script>
 
 <template>
-  <div class="rounded-xl bg-muted/60 dark:bg-muted/40 px-5 py-4 transition-all duration-150">
+  <div class="rounded-xl bg-muted/60 dark:bg-muted px-5 py-4 transition-all duration-150">
     <p class="text-muted-foreground mb-4 text-xs font-semibold uppercase tracking-widest">{{ title }}</p>
     <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
     <div :class="height ?? 'h-52'">

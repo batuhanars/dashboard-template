@@ -123,7 +123,7 @@ const chartOptions = computed<ChartOptions<'line'>>(() => {
 </script>
 
 <template>
-  <div class="rounded-xl bg-muted/60 dark:bg-muted/40">
+  <div class="rounded-xl bg-muted/60 dark:bg-muted">
     <!-- Header: tabs -->
     <div class="flex flex-wrap items-center gap-x-1 gap-y-2 border-b border-border/40 px-5 py-3">
       <button

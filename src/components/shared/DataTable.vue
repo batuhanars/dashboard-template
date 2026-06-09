@@ -120,7 +120,7 @@ function nextPage() {
 </script>
 
 <template>
-  <div class="rounded-xl bg-muted/60 dark:bg-muted/40 overflow-hidden">
+  <div class="rounded-xl bg-muted/60 dark:bg-muted overflow-hidden">
 
     <!-- Top bar: arama + ek araçlar (slot) -->
     <div class="flex flex-wrap items-center gap-2 px-4 py-3 border-b border-border/40">
