@@ -46,7 +46,7 @@ function isActive(name: string): boolean {
 </script>
 
 <template>
-  <header class="border-border bg-background/95 backdrop-blur-sm flex h-16 shrink-0 items-center gap-3 border-b px-4 shadow-sm">
+  <header class="border-border bg-background/95 backdrop-blur-sm flex h-16 shrink-0 items-center gap-3 border-b px-4">
     <!-- Mobile menu trigger -->
     <button
       class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex size-9 items-center justify-center rounded-lg transition-colors lg:hidden"
