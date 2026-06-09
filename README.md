@@ -2,7 +2,7 @@
 
 Vitrin kalitesinde, "Use this template" ile çoğaltılmaya hazır Vue 3 admin panel şablonu. Mock data ile sıfır backend bağımlılığı, dark mode ve TR/EN i18n baştan kurulu.
 
-![Dashboard](docs/dashboard.png)
+![Dashboard Dark](docs/dashboard-dark.png)
 
 ## Özellikler
 
@@ -35,9 +35,17 @@ Vitrin kalitesinde, "Use this template" ile çoğaltılmaya hazır Vue 3 admin p
 
 ## Ekran Görüntüleri
 
-| Login | Dashboard |
-|-------|-----------|
-| ![Login](docs/login.png) | ![Dashboard](docs/dashboard.png) |
+**Dashboard**
+
+| Dark | Light |
+|------|-------|
+| ![Dashboard Dark](docs/dashboard-dark.png) | ![Dashboard Light](docs/dashboard-light.png) |
+
+**Login**
+
+| Dark | Light |
+|------|-------|
+| ![Login Dark](docs/login-dark.png) | ![Login Light](docs/login-light.png) |
 
 ## Hızlı Başlangıç
 
