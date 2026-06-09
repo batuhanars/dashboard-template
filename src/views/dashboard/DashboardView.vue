@@ -7,6 +7,7 @@ import type { KpiMetric } from '@/types/api'
 
 import DashboardRecentTransactions from './components/DashboardRecentTransactions.vue'
 import DashboardMainChart from './components/DashboardMainChart.vue'
+import DashboardTxDistribution from './components/DashboardTxDistribution.vue'
 
 const { t } = useI18n()
 const { isDark } = useTheme()
@@ -26,18 +27,29 @@ function formatKpiValue(metric: KpiMetric): string {
 const weeklyRevenueChartData = computed<ChartData>(() => {
   const series = data.value?.revenueSeries ?? []
   const weekly = series.filter((_, i) => i % 7 === 0).slice(-10)
-  const barColor = isDark.value ? 'rgba(129,140,248,0.75)' : 'rgba(99,102,241,0.75)'
-  const barHover = isDark.value ? 'rgba(129,140,248,0.9)' : 'rgba(99,102,241,0.9)'
+  const palette = [
+    'rgba(147,141,216,0.85)',
+    'rgba(152,216,181,0.85)',
+    'rgba(129,177,216,0.85)',
+    'rgba(216,168,147,0.85)',
+    'rgba(180,152,216,0.85)',
+    'rgba(152,197,170,0.85)',
+    'rgba(216,195,141,0.85)',
+    'rgba(141,197,216,0.85)',
+    'rgba(197,152,216,0.85)',
+    'rgba(152,216,196,0.85)',
+  ]
   return {
     labels: weekly.map((p) => p.date.slice(5)),
     datasets: [
       {
         label: t('dashboard.chart.weeklyRevenue'),
         data: weekly.map((p) => p.value),
-        backgroundColor: barColor,
-        hoverBackgroundColor: barHover,
-        borderRadius: 5,
+        backgroundColor: weekly.map((_, i) => palette[i % palette.length]),
+        hoverBackgroundColor: weekly.map((_, i) => palette[i % palette.length].replace('0.85', '1')),
+        borderRadius: { topLeft: 6, topRight: 6, bottomLeft: 0, bottomRight: 0 },
         borderWidth: 0,
+        barPercentage: 0.45,
       },
     ],
   }
@@ -50,6 +62,8 @@ const txDistributionChartData = computed<ChartData>(() => {
   for (const tx of txs) {
     if (tx.status in counts) counts[tx.status as keyof typeof counts]++
   }
+  const darkSegment = isDark.value ? 'rgba(226,232,240,0.85)' : 'rgba(45,47,62,0.85)'
+  const darkSegmentHover = isDark.value ? 'rgba(226,232,240,1)' : 'rgba(45,47,62,1)'
   return {
     labels: [
       t('dashboard.txStatus.completed'),
@@ -60,17 +74,19 @@ const txDistributionChartData = computed<ChartData>(() => {
       {
         data: [counts.completed, counts.pending, counts.failed],
         backgroundColor: [
-          'rgba(16,185,129,0.85)',
-          'rgba(245,158,11,0.85)',
-          'rgba(239,68,68,0.85)',
+          'rgba(147,141,216,0.9)',
+          'rgba(152,216,181,0.9)',
+          darkSegment,
         ],
         hoverBackgroundColor: [
-          'rgba(16,185,129,1)',
-          'rgba(245,158,11,1)',
-          'rgba(239,68,68,1)',
+          'rgba(147,141,216,1)',
+          'rgba(152,216,181,1)',
+          darkSegmentHover,
         ],
-        borderWidth: 0,
-        hoverOffset: 4,
+        borderWidth: 3,
+        borderColor: isDark.value ? '#3c3c46' : '#f4f4f6',
+        spacing: 0,
+        hoverOffset: 6,
       },
     ],
   }
@@ -114,7 +130,7 @@ const txDistributionChartData = computed<ChartData>(() => {
           :label="$t(`dashboard.kpi.${metric.key}`)"
           :value="formatKpiValue(metric)"
           :delta-pct="metric.deltaPct"
-          :color="(['sky', 'violet', 'teal', 'rose'] as const)[i % 4]"
+          :variant="i % 2 === 0 ? 'a' : 'b'"
         />
       </div>
 
@@ -124,8 +140,8 @@ const txDistributionChartData = computed<ChartData>(() => {
           <DashboardMainChart :series="data.revenueSeries" :metrics="data.metrics" />
           <!-- İkinci satır: bar + doughnut -->
           <div class="grid gap-5 sm:grid-cols-2">
-            <ChartCard :title="$t('dashboard.chart.weeklyRevenue')"  type="bar"      :data="weeklyRevenueChartData" />
-            <ChartCard :title="$t('dashboard.chart.txDistribution')" type="doughnut" :data="txDistributionChartData" />
+            <ChartCard :title="$t('dashboard.chart.weeklyRevenue')"  type="bar" :data="weeklyRevenueChartData" />
+            <DashboardTxDistribution :data="txDistributionChartData" />
           </div>
         </div>
         <DashboardRecentTransactions :transactions="data.recentTransactions" />
