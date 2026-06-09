@@ -8,9 +8,14 @@ import type { KpiMetric } from '@/types/api'
 import DashboardRecentTransactions from './components/DashboardRecentTransactions.vue'
 import DashboardMainChart from './components/DashboardMainChart.vue'
 import DashboardTxDistribution from './components/DashboardTxDistribution.vue'
+import DashboardDateFilter from './components/DashboardDateFilter.vue'
+import type { DateRange, CustomRange } from './components/DashboardDateFilter.vue'
 
 const { t } = useI18n()
 const { isDark } = useTheme()
+
+const dateRange   = ref<DateRange>('month')
+const customRange = ref<CustomRange | undefined>(undefined)
 
 const { data, isPending } = useQuery({
   queryKey: ['dashboard', 'summary'],
@@ -95,9 +100,16 @@ const txDistributionChartData = computed<ChartData>(() => {
 
 <template>
   <div class="space-y-5">
-    <div>
-      <h1 class="text-foreground text-xl font-bold tracking-tight">{{ $t('nav.dashboard') }}</h1>
-      <p class="text-muted-foreground mt-0.5 text-sm">{{ $t('dashboard.subtitle') }}</p>
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <h1 class="text-foreground text-xl font-bold tracking-tight">{{ $t('nav.dashboard') }}</h1>
+        <p class="text-muted-foreground mt-0.5 text-sm">{{ $t('dashboard.subtitle') }}</p>
+      </div>
+      <DashboardDateFilter
+        v-model="dateRange"
+        :custom-range="customRange"
+        @update:custom-range="customRange = $event"
+      />
     </div>
 
     <template v-if="isPending">

@@ -90,6 +90,15 @@
       "completed": "Completed",
       "pending": "Pending",
       "failed": "Failed"
+    },
+    "filter": {
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month",
+      "year": "This Year",
+      "custom": "Custom",
+      "apply": "Apply",
+      "selectRange": "Select a date range"
     }
   },
   "users": {

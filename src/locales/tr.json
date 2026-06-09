@@ -90,6 +90,15 @@
       "completed": "Tamamlandı",
       "pending": "Beklemede",
       "failed": "Başarısız"
+    },
+    "filter": {
+      "today": "Bugün",
+      "week": "Bu Hafta",
+      "month": "Bu Ay",
+      "year": "Bu Yıl",
+      "custom": "Özel",
+      "apply": "Uygula",
+      "selectRange": "Tarih aralığı seçin"
     }
   },
   "users": {
