@@ -46,7 +46,7 @@ const total = computed(() => legendItems.value.reduce((s, item) => s + item.valu
     </p>
     <div class="flex flex-1 items-center gap-10 px-5">
       <!-- Donut -->
-      <div class="min-h-0 w-36 shrink-0 self-stretch">
+      <div class="h-40 w-36 shrink-0">
         <Doughnut :key="chartKey" :data="typedData" :options="typedOptions" />
       </div>
 
