@@ -71,6 +71,7 @@
     }
   },
   "dashboard": {
+    "subtitle": "Güncel verilere genel bakış",
     "kpi": {
       "revenue": "Gelir",
       "users": "Kullanıcılar",

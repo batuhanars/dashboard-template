@@ -81,7 +81,7 @@ const txDistributionChartData = computed<ChartData>(() => {
   <div class="space-y-5">
     <div>
       <h1 class="text-foreground text-xl font-bold tracking-tight">{{ $t('nav.dashboard') }}</h1>
-      <p class="text-muted-foreground mt-0.5 text-sm">{{ $t('layout.notifications.empty') }}</p>
+      <p class="text-muted-foreground mt-0.5 text-sm">{{ $t('dashboard.subtitle') }}</p>
     </div>
 
     <template v-if="isPending">

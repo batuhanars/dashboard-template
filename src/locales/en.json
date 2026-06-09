@@ -71,6 +71,7 @@
     }
   },
   "dashboard": {
+    "subtitle": "Overview of your current metrics",
     "kpi": {
       "revenue": "Revenue",
       "users": "Users",

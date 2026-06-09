@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Menu, Bell, Sun, Moon, LogOut, User, Search, LayoutDashboard, Users, Settings } from 'lucide-vue-next'
+import { Menu, Bell, Sun, Moon, LogOut, User, Search } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
+import { quickLinks } from '@/lib/nav'
 
 const emit = defineEmits<{
   'open-mobile-menu': []
@@ -16,12 +17,6 @@ const { t } = useI18n()
 
 const notificationsOpen = ref(false)
 const searchQuery = ref('')
-
-const quickLinks = [
-  { name: 'home', labelKey: 'nav.dashboard', icon: LayoutDashboard, path: '/' },
-  { name: 'users', labelKey: 'nav.users', icon: Users, path: '/users' },
-  { name: 'settings', labelKey: 'nav.settings', icon: Settings, path: '/settings' },
-]
 
 const userInitials = computed(() => {
   if (!user.value?.name) return '?'

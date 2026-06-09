@@ -1,48 +1,13 @@
 <script setup lang="ts">
-import {
-  LayoutDashboard, Users, Settings,
-  PanelLeft, PanelLeftClose, ChevronDown,
-} from 'lucide-vue-next'
-import type { Component } from 'vue'
-
-interface SubNavItem {
-  name: string
-  labelKey: string
-  path: string
-}
-
-interface NavItem {
-  name: string
-  labelKey: string
-  icon: Component
-  path?: string
-  children?: SubNavItem[]
-}
-
-interface NavGroup {
-  labelKey?: string
-  items: NavItem[]
-}
+import { PanelLeft, PanelLeftClose, ChevronDown } from 'lucide-vue-next'
+import { navGroups } from '@/lib/nav'
 
 const route = useRoute()
 const ui = useUiStore()
 const { sidebarCollapsed } = storeToRefs(ui)
 const { t } = useI18n()
 
-const navGroups: NavGroup[] = [
-  {
-    items: [
-      { name: 'home', labelKey: 'nav.dashboard', icon: LayoutDashboard, path: '/' },
-    ],
-  },
-  {
-    labelKey: 'nav.group.management',
-    items: [
-      { name: 'users', labelKey: 'nav.users', icon: Users, path: '/users' },
-      { name: 'settings', labelKey: 'nav.settings', icon: Settings, path: '/settings' },
-    ],
-  },
-]
+const appName = import.meta.env.VITE_APP_NAME || 'Dashboard'
 
 // Expanded accordion items
 const expandedItems = ref<Set<string>>(new Set())
@@ -86,7 +51,7 @@ function isGroupActive(item: NavItem): boolean {
           <span class="text-primary-foreground text-sm font-bold">D</span>
         </div>
         <span class="text-sidebar-foreground flex-1 truncate text-sm font-bold tracking-tight">
-          Dashboard
+          {{ appName }}
         </span>
       </template>
       <button
