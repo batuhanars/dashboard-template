@@ -30,11 +30,25 @@ export function useUsersColumns(onView: (user: User) => void, onDelete: (user: U
       accessorKey: 'name',
       header: () => t('users.columns.name'),
       enableSorting: true,
-      cell: ({ row }) =>
-        h('div', { class: 'flex flex-col gap-0.5' }, [
-          h('span', { class: 'font-medium text-foreground' }, row.original.name),
-          h('span', { class: 'text-xs text-muted-foreground' }, row.original.email),
-        ]),
+      cell: ({ row }) => {
+        const initials = row.original.name
+          .split(' ')
+          .map((w: string) => w[0])
+          .join('')
+          .toUpperCase()
+          .slice(0, 2)
+        return h('div', { class: 'flex items-center gap-3' }, [
+          h(
+            'div',
+            { class: 'flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold select-none' },
+            initials,
+          ),
+          h('div', { class: 'flex min-w-0 flex-col gap-0.5' }, [
+            h('span', { class: 'font-medium text-foreground truncate' }, row.original.name),
+            h('span', { class: 'text-xs text-muted-foreground truncate' }, row.original.email),
+          ]),
+        ])
+      },
     },
     {
       accessorKey: 'role',
